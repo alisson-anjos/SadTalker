@@ -87,6 +87,7 @@ def sadtalker_demo(checkpoint_path='checkpoints', config_path='src/config', warp
                                 blink_every = gr.Checkbox(label="use eye blink", value=True)
 
                             with gr.Row():
+                                half = gr.Checkbox(label="Use half precision")
                                 size_of_image = gr.Radio([256, 512], value=256, label='face model resolution', info="use 256/512 model?") # 
                                 preprocess_type = gr.Radio(['crop', 'resize','full', 'extcrop', 'extfull'], value='crop', label='preprocess', info="How to handle input image?")
                             
@@ -98,9 +99,6 @@ def sadtalker_demo(checkpoint_path='checkpoints', config_path='src/config', warp
                                 batch_size = gr.Slider(label="batch size in generation", step=1, maximum=10, value=1)
                                 enhancer = gr.Checkbox(label="GFPGAN as Face enhancer")
                            
-                            with gr.Checkbox():
-                                half = gr.Checkbox(label="Use half precision")
-                            
                             submit = gr.Button('Generate', elem_id="sadtalker_generate", variant='primary')
                             
                 with gr.Tabs(elem_id="sadtalker_genearted"):
