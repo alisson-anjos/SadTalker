@@ -37,7 +37,7 @@ class SadTalker():
       
 
     def test(self, source_image, driven_audio, preprocess='crop', 
-        still_mode=False,  use_enhancer=False, batch_size=1, size=256, 
+        still_mode=False,  use_enhancer=False, use_half=False, batch_size=1, size=256, 
         pose_style = 0, 
         facerender='facevid2vid',
         exp_scale=1.0, 
@@ -55,7 +55,7 @@ class SadTalker():
         self.preprocess_model = CropAndExtract(self.sadtalker_paths, self.device)
         
         if facerender == 'facevid2vid' and self.device != 'mps':
-            self.animate_from_coeff = AnimateFromCoeff(self.sadtalker_paths, self.device)
+            self.animate_from_coeff = AnimateFromCoeff(self.sadtalker_paths, self.device, use_half)
         elif facerender == 'pirender' or self.device == 'mps':
             self.animate_from_coeff = AnimateFromCoeff_PIRender(self.sadtalker_paths, self.device)
             facerender = 'pirender'

@@ -40,7 +40,7 @@ def main(args):
     audio_to_coeff = Audio2Coeff(sadtalker_paths,  device)
     
     if args.facerender == 'facevid2vid':
-        animate_from_coeff = AnimateFromCoeff(sadtalker_paths, device)
+        animate_from_coeff = AnimateFromCoeff(sadtalker_paths, device, args.half)
     elif args.facerender == 'pirender':
         animate_from_coeff = AnimateFromCoeff_PIRender(sadtalker_paths, device)
     else:
@@ -126,7 +126,8 @@ if __name__ == '__main__':
     parser.add_argument("--verbose",action="store_true", help="saving the intermedia output or not" ) 
     parser.add_argument("--old_version",action="store_true", help="use the pth other than safetensor version" ) 
     parser.add_argument("--facerender", default='facevid2vid', choices=['pirender', 'facevid2vid'] ) 
-    
+    parser.add_argument("--half", action="store_true", help="use half precision or not" )
+
 
     # net structure and parameters
     parser.add_argument('--net_recon', type=str, default='resnet50', choices=['resnet18', 'resnet34', 'resnet50'], help='useless')
